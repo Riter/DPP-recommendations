@@ -1,6 +1,6 @@
 # DPP-recommendations
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)]([https://colab.research.google.com/your-notebook-link](https://colab.research.google.com/drive/1YDyAEc9irfTy44NkFl2RfLLuHX--PGcw?usp=sharing))
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1YDyAEc9irfTy44NkFl2RfLLuHX--PGcw?usp=sharing)
 
 ## Описание проекта
 

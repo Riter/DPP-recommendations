@@ -1,5 +1,7 @@
 # DPP-recommendations
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)]([https://colab.research.google.com/your-notebook-link](https://colab.research.google.com/drive/1YDyAEc9irfTy44NkFl2RfLLuHX--PGcw?usp=sharing))
+
 ## Описание проекта
 
 DPP-recommendations — это система рекомендаций для платформы командообразования, которая помогает подбирать кейсы для команд, команды для кейсов и людей в команды на основе их навыков и предпочтений. Основная задача проекта — автоматизация процесса формирования команд, назначение на них подходящих кейсов, а также поиск наиболее подходящих команд для участников.

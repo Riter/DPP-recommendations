@@ -19,6 +19,11 @@ DPP-recommendations — это система рекомендаций для п
     conda activate dpp-recs
     ```
 
+3. Запустите сервер FastAPI с помощью `uvicorn`:
+    ```bash
+    uvicorn main:app --reload
+    ```
+
 ## Описание функционала
 
 ### 1. Команда - кейс

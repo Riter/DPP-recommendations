@@ -56,17 +56,22 @@ async def recommend_team_to_person(request: RecommendTeamToPersonRequest):
     best_score = -1
 
     for team in request.teams:
+        # Определяем заполненные роли в команде, основываясь на навыках и заданном пороге
         filled_roles = get_filled_roles(team.skills, team.required_roles, threshold=request.threshold)
+        # Определяем незаполненные роли
         unfilled_roles = [role for role in team.required_roles if role not in filled_roles]
 
         if unfilled_roles:
+            # Если есть незаполненные роли, оцениваем схожесть с учетом требуемых и незаполненных навыков
             unfilled_role_skills = get_required_skills(unfilled_roles)
             all_required_skills = get_required_skills(team.required_roles)
             similarity = calculate_weighted_similarity(request.person_skills, unfilled_role_skills, all_required_skills, request.unfilled_role_weight)
         else:
+            # Если все роли заполнены, считаем схожесть по навыкам команды
             team_skills = [skill for skills in team.skills.values() for skill in skills]
             similarity = calculate_weighted_similarity(request.person_skills, team_skills, team_skills)
         
+        # Обновляем наилучшую команду, если текущая имеет более высокую схожесть
         if similarity > best_score:
             best_team = team
             best_score = similarity
@@ -111,7 +116,7 @@ async def recommend_case_to_team(request: RecommendCaseToTeamRequest):
     # Преобразуем numpy.int64 в int для возврата
     return {"id": int(recommended_case['id']), "title": recommended_case['title']}
 
-
+# Рекомендация "Кейс - команда"
 @app.post("/recommend_team_to_case")
 async def recommend_team_to_case(request: RecommendTeamToCaseRequest):
     """

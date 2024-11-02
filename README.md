@@ -214,9 +214,7 @@ DPP-recommendations — это система рекомендаций для п
       "team_id": 1,
       "name": "Система контроля качества продуктов АО Медитек",
       "skills": {
-        "Member 1": ["C#", "Back-end разработка", "Git", "SQL", "
-
-Построение Rest API", "Docker"],
+        "Member 1": ["C#", "Back-end разработка", "Git", "SQL", "Построение Rest API", "Docker"],
         "Member 2": ["C#", "Back-end разработка", "Docker", "Git", "СУБД PostgreSQL", "Linux"],
         "Member 3": ["HTML", "CSS", "React", "Git", "Next", "Tailwind", "JavaScript"],
         "Member 4": ["DevOps", "Docker", "Kubernetes", "K8S", "Linux", "Helm", "Nginx", "Graphana"],

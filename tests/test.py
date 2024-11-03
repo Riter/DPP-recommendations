@@ -11,7 +11,7 @@ def test_recommend_team_to_person():
     response = client.post(
         "/recommend_team_to_person",
         json={
-            "person_skills": ["Python", "Docker", "Kubernetes", "Linux", "Machine Learning"],
+            "person_skills": ["Python", "Docker", "Kubernetes", "Linux", "Machine Learning", "SQL", "Matplotlib", "Seaborn"],
             "teams": [
                 {
                     "team_id": 1,
@@ -42,13 +42,18 @@ def test_recommend_team_to_person():
                     "required_roles": ["ML engineer", "Аналитик", "Python Backend", "DevOps", "ML Ops Engineer"]
                 }
             ],
-            "threshold": 0.5,
-            "unfilled_role_weight": 1.5
+            "role_filled_threshold": 0.5,
+            "unfilled_role_weight": 1.5,
+            "confidence_percentile": 0.8
         }
     )
     assert response.status_code == 200
-    assert "recommended_team_id" in response.json()
-    assert "recommended_team_name" in response.json()
+    assert "recommended_teams" in response.json()
+    assert len(response.json()["recommended_teams"]) > 0
+    for team in response.json()["recommended_teams"]:
+        assert "team_id" in team
+        assert "team_name" in team
+        assert "similarity" in team
 
 def test_recommend_case_to_team():
     # Пример запроса для "Команда - кейс"
@@ -73,7 +78,7 @@ def test_recommend_case_to_team():
                 {
                     "id": 1,
                     "title": "Система контроля качества",
-                    "description": "Система для контроля качества продукции",
+                    "description": "Система контроля качества продуктов АО 'Медитек' требуется для контроля качества и технических параметров различных приборов проектируемых компанией.",
                     "required_roles": "C# Backend, Тестировщик, Аналитик"
                 },
                 {
@@ -84,12 +89,17 @@ def test_recommend_case_to_team():
                 }
             ],
             "alpha": 0.6,
-            "beta": 0.4
+            "beta": 0.4,
+            "confidence_percentile": 0.8
         }
     )
     assert response.status_code == 200
-    assert "id" in response.json()
-    assert "title" in response.json()
+    assert "recommended_cases" in response.json()
+    assert len(response.json()["recommended_cases"]) > 0
+    for case in response.json()["recommended_cases"]:
+        assert "id" in case
+        assert "title" in case
+        assert "hybrid_similarity" in case
 
 def test_recommend_team_to_case():
     # Пример запроса для "Кейс - команда"
@@ -131,10 +141,14 @@ def test_recommend_team_to_case():
                 }
             ],
             "alpha": 0.6,
-            "beta": 0.4
+            "beta": 0.4,
+            "confidence_percentile": 0.8
         }
     )
     assert response.status_code == 200
-    assert "team_id" in response.json()
-    assert "team_name" in response.json()
-    assert "hybrid_similarity" in response.json()
+    assert "recommended_teams" in response.json()
+    assert len(response.json()["recommended_teams"]) > 0
+    for team in response.json()["recommended_teams"]:
+        assert "team_id" in team
+        assert "team_name" in team
+        assert "hybrid_similarity" in team

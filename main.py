@@ -83,6 +83,16 @@ class RecommendTeamToCaseRequest(BaseModel):
     beta: float = 0.5
     confidence_percentile: float = 0.9
 
+# Модель для новых данных
+class NewDataRequest(BaseModel):
+    team_id: int
+    team_title: str
+    case_title: str
+    case_description: str
+    user_fio: str
+    person_skills: List[str]
+    case_required_roles: List[str]
+
 # Рекомендация: Человек - Команда
 @app.post("/recommend_team_to_person")
 async def recommend_team_to_person(request: RecommendTeamToPersonRequest):
@@ -212,3 +222,11 @@ async def recommend_team_to_case(request: RecommendTeamToCaseRequest):
         return {"recommended_teams": recommended_teams}
     else:
         raise HTTPException(status_code=404, detail="No suitable team found")
+
+@app.post("/new_data")
+async def receive_new_data(request: NewDataRequest):
+    # Здесь можно добавить логику обработки данных:
+    return {
+        "message": "Новые данные успешно получены",
+        "data": request.dict()
+    }

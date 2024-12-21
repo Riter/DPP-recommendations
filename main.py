@@ -19,7 +19,7 @@ class Team(BaseModel):
     team_id: int
     name: str
     skills: Dict[str, List[str]]
-    required_roles: List[str] = None
+    required_roles: List[str] = None  # Currently only used for person-team recommendations, not for case-team matching
 
 class Case(BaseModel):
     """

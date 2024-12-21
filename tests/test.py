@@ -106,7 +106,6 @@ def test_recommend_case_to_team():
                     "Member 6": ["Data Science", "SQL", "Pandas", "Математическая статистика", "Управление проектами"],
                     "Member 7": ["Canva", "Figma", "CSS", "UI/UX", "Adobe XD", "Photoshop"]
                 },
-                "required_roles": ["C# Backend", "Тестировщик", "Аналитик"]
             },
             "cases": [
                 {

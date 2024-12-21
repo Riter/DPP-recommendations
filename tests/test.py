@@ -185,3 +185,39 @@ def test_recommend_team_to_case():
         assert "team_id" in team
         assert "team_name" in team
         assert "hybrid_similarity" in team
+
+def test_receive_new_data():
+    # Test data following the NewDataRequest model structure
+    response = client.post(
+        "/new_data",
+        json={
+            "team_id": 1,
+            "team_title": "Test Team",
+            "case_title": "Test Case",
+            "case_description": "This is a test case description",
+            "user_fio": "John Doe",
+            "person_skills": ["Python", "Data Science", "DevOps"],
+            "case_required_roles": ["Backend Developer", "Тестировщик"]
+        }
+    )
+
+    # Check response status code
+    assert response.status_code == 200
+
+    # Check response structure
+    response_data = response.json()
+    assert "message" in response_data
+    assert "data" in response_data
+
+    # Check response message
+    assert response_data["message"] == "Новые данные успешно получены"
+
+    # Check returned data matches input
+    returned_data = response_data["data"]
+    assert returned_data["team_id"] == 1
+    assert returned_data["team_title"] == "Test Team"
+    assert returned_data["case_title"] == "Test Case"
+    assert returned_data["case_description"] == "This is a test case description"
+    assert returned_data["user_fio"] == "John Doe"
+    assert returned_data["person_skills"] == ["Python", "Data Science", "DevOps"]
+    assert returned_data["case_required_roles"] == ["Backend Developer", "Тестировщик"]
